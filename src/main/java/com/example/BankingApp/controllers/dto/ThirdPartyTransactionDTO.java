@@ -22,4 +22,6 @@ public class ThirdPartyTransactionDTO {
     @NotNull (message = "Please, specify Send or Receive for the type of transaction")
     @Enumerated(EnumType.STRING)
     private TransactionType transactionType;
+
+
 }

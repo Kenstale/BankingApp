@@ -6,4 +6,11 @@ public class StatusDTO {
 
     private AccountStatus accountStatus;
 
+    public AccountStatus getAccountStatus() {
+        return accountStatus;
+    }
+
+    public void setAccountStatus(AccountStatus accountStatus) {
+        this.accountStatus = accountStatus;
+    }
 }

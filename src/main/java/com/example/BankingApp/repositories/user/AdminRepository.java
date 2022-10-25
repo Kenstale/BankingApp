@@ -1,4 +1,8 @@
 package com.example.BankingApp.repositories.user;
 
-public interface AdminRepository {
+import com.example.BankingApp.models.users.Admin;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface AdminRepository extends JpaRepository<Admin, Long> {
+
 }

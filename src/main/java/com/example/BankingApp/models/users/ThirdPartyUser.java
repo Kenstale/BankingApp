@@ -25,8 +25,9 @@ public class ThirdPartyUser {
 
 
     // Constructor
-
-    public ThirdParty(String name, String hashedKey) {
+    public ThirdPartyUser() {
+    }
+    public ThirdPartyUser(String name, String hashedKey) {
         setName(name);
         setHashedKey(hashedKey);
     }
@@ -39,6 +40,5 @@ public class ThirdPartyUser {
         this.name = name;
     }
 
-    public ThirdPartyUser() {
-    }
+
 }

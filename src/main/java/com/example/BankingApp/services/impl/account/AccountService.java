@@ -1,6 +1,7 @@
 package com.example.BankingApp.services.impl.account;
 
 import com.example.BankingApp.controllers.dto.BalanceDTO;
+import com.example.BankingApp.controllers.dto.StatusDTO;
 import com.example.BankingApp.embedable.Constants;
 import com.example.BankingApp.embedable.Money;
 import com.example.BankingApp.models.Accounts.Account;
@@ -72,12 +73,12 @@ public class AccountService implements AccountServiceInterface {
 
             int i = 0;
             for(Account account : accounts) {
-                Optional<Savings> existsSavings = savingsRepository.findById(account.getId());
+                Optional<Savings> existsSavings = savingsRepository.findById(account.getAccountNumber());
 
                 // In the case of Savings Account, it must be detected if the corresponding interest was added,
                 // for that getSavingsAccount() method from savingsService is called
                 if (existsSavings.isPresent()) {
-                    Savings savings = savingsService.getSavingsAccount(existsSavings.get().getId());
+                    Savings savings = savingsService.getSavingsAccount(existsSavings.get().getAccountNumber());
                     accounts.set(i, savings);
                 }
                 i++;
@@ -85,12 +86,12 @@ public class AccountService implements AccountServiceInterface {
 
             int j = 0;
             for(Account account : accounts) {
-                Optional<CreditCard> existsCreditCard = creditCardRepository.findById(account.getId());
+                Optional<CreditCard> existsCreditCard = creditCardRepository.findById(account.getAccountNumber());
 
                 // In the case of Credit Card Account, it must be detected if the corresponding interest was added,
                 // for that getCreditCardAccount() method from CreditCardService is called
                 if (existsCreditCard.isPresent()) {
-                    CreditCard creditCard = creditCardService.getCreditCardAccount(existsCreditCard.get().getId());
+                CreditCard creditCard = creditCardService.getCreditCardAccount(existsCreditCard.get().getAccountNumber());
                     accounts.set(j, creditCard);
                 }
                 j++;
@@ -154,7 +155,7 @@ public class AccountService implements AccountServiceInterface {
         Optional<Account> existsAccount = accountRepository.findById(id);
 
         if(existsAccount.isPresent()) {
-            existsAccount.get().setStatus(statusDTO.getStatus());
+            existsAccount.get().setStatus(statusDTO.getAccountStatus());
             accountRepository.save(existsAccount.get());
         } else {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Account not found");
