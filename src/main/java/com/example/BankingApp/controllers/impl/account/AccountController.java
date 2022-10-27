@@ -34,12 +34,6 @@ public class AccountController implements AccountControllerInterface {
         return accountService.getAccount(id);
     }
 
-    @GetMapping("/myAccount")
-    @ResponseStatus(HttpStatus.OK)
-    public List<Account> getAllAccountHolderAccounts(@AuthenticationPrincipal UserDetails userDetails) {
-        return accountService.getAllAccountHolderAccounts(userDetails.getUsername());
-    }
-
     @PatchMapping("/accounts/balance/{id}")
     @ResponseStatus(HttpStatus.ACCEPTED)
     public void updateBalance(@PathVariable ("id") Long id, @RequestBody @Valid BalanceDTO balanceDTO){
